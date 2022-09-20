@@ -2,6 +2,7 @@ import bfs from "@code/BFSGraphMatrix";
 import { matrix2 } from "./graph";
 
 test("bfs - graph matrix", function () {
+    debugger;
     expect(bfs(matrix2, 0, 6)).toEqual([
         0,
         1,
