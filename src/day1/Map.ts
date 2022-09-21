@@ -12,7 +12,7 @@ export default class Map<T extends (string | number), V> {
 
     constructor() {
         this.length = 0;
-        const capacity = 1024;
+        const capacity = 32;
         this.data = new ArrayList(capacity);
     }
 
@@ -69,6 +69,9 @@ export default class Map<T extends (string | number), V> {
         
     }
 
+    has(key: T): boolean{
+        return this.getNode(key) !== undefined;
+    }
     size(): number {
         return this.length;
     }

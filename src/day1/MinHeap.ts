@@ -9,7 +9,7 @@ export default class MinHeap {
         this.capacity = 32;
         this.data = Array(this.capacity);
     }
-
+    
     insert(value: number): void {
         this.insureCapacity();
         this.data[this.length] = value;

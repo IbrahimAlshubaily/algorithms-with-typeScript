@@ -6,7 +6,7 @@ test("Trie", function() {
     trie.insert("fool");
     trie.insert("foolish");
     trie.insert("bar");
-
+    debugger;
     expect(trie.find("fo").sort()).toEqual([
         "foo",
         "fool",
