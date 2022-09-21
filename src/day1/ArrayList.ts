@@ -2,13 +2,13 @@
 export default class ArrayList<T> {
     public length: number;
     private capacity : number;
-    private data : T[];
+    private data : (T | undefined) [];
     
 
     constructor(capacity : number) {
         this.capacity = capacity;
         this.length = 0;
-        this.data = Array<T>(capacity);
+        this.data = Array<T | undefined>(capacity);
     }
 
     prepend(item: T): void {
@@ -58,6 +58,13 @@ export default class ArrayList<T> {
         return this.data[idx];
     }
 
+    update(idx: number, item: T | undefined): T | undefined {
+        if (idx >= this.length) {
+            return;
+        }
+        return this.data[idx] = item;
+    }
+
     shiftRight(idx : number) {
         let currIdx = this.length - 1;
         while (currIdx >= idx){
@@ -77,11 +84,7 @@ export default class ArrayList<T> {
         if (this.length < this.capacity) {
             return;
         }
+        this.data.concat(Array(this.capacity));
         this.capacity *= 2;
-        const newData = Array<T>(this.capacity);
-        for (let i = 0; i < this.length; i++){
-            newData[i] = this.data[i];
-        }
-        this.data = newData;
     }
 }
