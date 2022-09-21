@@ -9,7 +9,7 @@ test("maze solver", function () {
         "x          x",
         "x xxxxxxxxxx",
     ];
-
+    debugger;
     // there is only one path through
     expect(maze_solver(maze, "x", {x: 10, y: 0}, {x: 1, y: 5})).toEqual([
         {x: 10, y: 0},
