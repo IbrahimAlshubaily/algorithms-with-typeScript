@@ -1,10 +1,6 @@
 import ArrayList from "./ArrayList";
 
-declare type MapListNode<K, V> = {
-    key: K,
-    value: V,
-    next?: MapListNode<K,V>,
-}
+
 export default class Map<T extends (string | number), V> {
     
     private length: number;
@@ -75,7 +71,7 @@ export default class Map<T extends (string | number), V> {
     size(): number {
         return this.length;
     }
-    
+
     private getNode(key: T): MapListNode<T, V> | undefined {
         let bucketIdx = this.getIdx(key);
         let curr = this.data.get(bucketIdx);

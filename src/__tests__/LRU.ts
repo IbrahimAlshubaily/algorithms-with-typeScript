@@ -15,6 +15,8 @@ test("LRU", function () {
 
     lru.update("ball", 69420);
     expect(lru.get("ball")).toEqual(69420);
+
+    debugger;
     expect(lru.get("foo")).toEqual(undefined);
     expect(lru.get("bar")).toEqual(420);
     lru.update("foo", 69);

@@ -33,6 +33,13 @@ declare type BinaryNode<T> = {
     right: BinaryNode<T> | null;
 };
 
+declare type MapListNode<K, V> = {
+    key: K,
+    value: V,
+    next?: MapListNode<K,V>,
+    prev?: MapListNode<K,V>,
+};
+
 declare type GeneralNode<T> = {
     value: T;
     children: GeneralNode<T>[];
