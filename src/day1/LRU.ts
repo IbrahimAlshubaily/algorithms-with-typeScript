@@ -8,23 +8,25 @@ export default class LRU<K, V> {
     private tail: MapListNode<K, V> | undefined;
 
     constructor(capacity: number) {
-        this.capacity = capacity;
+        
         this.length = 0;
-        this.cache = new Map<K, MapListNode<K, V>>();
+        this.capacity = capacity;
         this.head = this.tail = undefined;
+        
+        this.cache = new Map<K, MapListNode<K, V>>();
     }
 
     update(key: K, value: V): void {
         let node = this.cache.get(key);
         if (!node) {
-            this.length++;
-            node = {key: key, value: value} as MapListNode<K, V>;
-            this.cache.set(key, node);
-            if (this.length > this.capacity) {
+            if (this.length === this.capacity) {
                 this.cache.delete(this.tail?.key as K);
                 this.detach(this.tail);
                 this.length--;
             }
+            this.length++;
+            node = {key: key, value: value} as MapListNode<K, V>;
+            this.cache.set(key, node);
         }
         this.detach(node);
         this.prepend(node);
@@ -51,24 +53,19 @@ export default class LRU<K, V> {
             return;
         }
 
-        if (node.key === this.head?.key && this.head.next){
-            this.head = this.head.next;
-            this.head.prev = undefined;
-            node.next = node.prev = undefined;
-            return;
-        }
-
-        if (node.key === this.tail?.key && this.tail.prev){
-            this.tail = this.tail.prev;
-            this.tail.next = undefined;
-            node.next = node.prev = undefined;
-            return;
-        }
         if (node.prev){
             node.prev.next = node.next;
         }
         if(node.next){
             node.next.prev = node.prev;
+        }
+
+        if (node.key === this.head?.key && this.head.next){
+            this.head = this.head.next;
+        }
+
+        if (node.key === this.tail?.key && this.tail.prev){
+            this.tail = this.tail.prev;
         }
         node.next = node.prev = undefined;
     }
